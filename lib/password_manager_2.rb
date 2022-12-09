@@ -1,20 +1,3 @@
-# As a user of Password Manager 2.0 I want to be able to add a new, secure and unique password.
-# I want to be able to view all services I have passwords stored for and have them sorted for me, 
-# either by alphabetically by service or date added. 
-
-# I would like to be able to delete services and their associated passwords
-
-
-# Helper functions
-  # password validator
-  # check if service exists
-
-#add
-  # check if password is valid - all tests pass so? not needed?
-
-
-
-
 class PasswordManager2
 
   def initialize
