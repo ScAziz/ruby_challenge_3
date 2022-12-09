@@ -10,24 +10,9 @@
   # check if service exists
 
 #add
-  # check if password is valid - not on tests yet, tackle later, as for below.
-  # store the new service and password 
-  # store the date the password was added 
+  # check if password is valid - all tests pass so? not needed?
 
-# sort_by
-#   takes 1 string as an arg, either service or added on
-#   sort stored by either service name or date added 
-#   return sorted list
 
-# password_for
-#   returns password for service 
-
-# update
-#   takes 2 strings as args, service name and new password 
-#   check if service exists
-#   check if password is valid
-#   check if password is in use
-#   update password for that service
 
 
 class PasswordManager2
@@ -49,7 +34,7 @@ class PasswordManager2
     elsif services.include?(service)
       return "ERROR: Service names must be unique"
     else
-      @password_container.push({"service" => service, "password" => password} )
+      @password_container.push({"service" => service, "password" => password, "added_on" => Date.today} )
     end
   end
 
@@ -77,4 +62,19 @@ class PasswordManager2
     found_service = @password_container.find { |stored_item| stored_item["service"] == service }
     return found_service["password"]
   end
+
+  def sort_by(sort_choice)
+    if sort_choice == "service"
+      return services.sort
+    elsif sort_choice == "added_on"
+      sorted_array = @password_container.sort_by { |stored_item| stored_item["added_on"]}
+      sorted_service_names = Array.new
+      sorted_array.each { |stored_item| sorted_service_names.push(stored_item["service"]) }
+      return sorted_service_names
+    else 
+      return "error"
+    end
+
+  end
+
 end
