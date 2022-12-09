@@ -14,21 +14,12 @@
   # store the new service and password 
   # store the date the password was added 
 
-#remove
-  # takes 1 string as arg, name of service
-  # finds and deletes service and password 
-
-#services
-  
-#   returns a list of all stored services but not passwords
-
 # sort_by
 #   takes 1 string as an arg, either service or added on
 #   sort stored by either service name or date added 
 #   return sorted list
 
 # password_for
-#   takes one string as arg, service
 #   returns password for service 
 
 # update
@@ -62,10 +53,28 @@ class PasswordManager2
     end
   end
 
+  def remove(service)
+    @password_container.each { |stored_item| stored_item["service"] == service ? @password_container.delete(stored_item) : return }
+  end
+
+  def update(service, new_password)
+    found_service = @password_container.find { |stored_item| stored_item["service"] == service }
+
+    if password_in_use?(new_password)
+      return "ERROR"
+    else 
+      found_service["password"] = new_password
+    end
+  end
+
   def services
     stored_services = Array.new
     @password_container.each { |stored_item| stored_services.push(stored_item["service"])}
     return stored_services
   end
 
+  def password_for(service)
+    found_service = @password_container.find { |stored_item| stored_item["service"] == service }
+    return found_service["password"]
+  end
 end
